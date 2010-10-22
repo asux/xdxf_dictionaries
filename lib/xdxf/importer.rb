@@ -27,7 +27,7 @@ module XDXF
       transaction do 
       
         # Info regarding the dict type
-        dic = XDXF::Dictionary.create!(
+        dictionary_record = XDXF::Dictionary.create!(
           :full_name => doc.css('full_name').first.content,
           :description => doc.css('description').first.content,
           :lang_from => doc.css('xdxf').first.attributes['lang_from'].value,
@@ -35,19 +35,22 @@ module XDXF
         )
       
         # Articles
-        doc.css('ar').each do |ar|
-          (ardb = dic.articles.create!(
-            :the_article => ar.xpath('text()').first.serialize(serialize_options),
-            :raw_text => ar.serialize(serialize_options)
-          )).article_keys = ar.css('k').map{ |k|
+        articles = doc.css('ar')
+        articles.each_with_index do |article, index|
+          (article_record = dictionary_record.articles.create!(
+            :the_article => article.xpath('text()').first.serialize(serialize_options),
+            :raw_text => article.serialize(serialize_options)
+          )).article_keys = article.css('k').map do |article_key|
             XDXF::ArticleKey.find_or_create_by_the_key(
-              :the_key  => k.content,
-              :raw_text => k.serialize(serialize_options)
+              :the_key  => article_key.content,
+              :raw_text => article_key.serialize(serialize_options)
             )
-          }
-          puts "<< #{ardb.article_keys.map{|ak| ak.the_key}.join(",")}" if options[:verbose]
+          end
+          puts "<< [#{index + 1}/#{articles.size}] (#{(index + 1)*100/articles.size}%) #{article_record.article_keys.map{|ak| ak.the_key}.join(",")}" if options[:verbose]
         end
-                
+
+        puts "#{dictionary_record.articles.count} of #{articles.size} articles created from new dictionary" if options[:verbose]
+        
       end
      
     end
