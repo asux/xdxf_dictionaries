@@ -12,14 +12,13 @@ describe XDXF::Importer do
     @lang_to = 'RUS'
 
     @articles = (0..5).collect do |i|
-      {:k => Faker::Lorem.words(1), :content => Faker::Lorem.sentence}
+      {:k => Faker::Lorem.words(1).first, :content => Faker::Lorem.sentence}
     end
     
-    # @xml_io = File.open(File.join(File.dirname(__FILE__), 'dict.xdxf'), 'w+') do |io|
     @xml_io = StringIO.new
   
     # Building XML
-    @xml = Builder::XmlMarkup.new(:target => @xml_io, :indent => 1)
+    @xml = Builder::XmlMarkup.new(:target => @xml_io)
     @xml.instruct!
     @xml.declare! :DOCTYPE, :xdxf, :SYSTEM, "http://xdxf.sourceforge.net/xdxf_lousy.dtd"
     @xml.xdxf :lang_from => @lang_from, :lang_to => @lang_to, :format => 'visual' do
@@ -34,11 +33,17 @@ describe XDXF::Importer do
       end
 
     end
-
+    
+    # Uncomment if you whant to dump XML to file
+    # File.open(File.join(File.dirname(__FILE__), 'dict.xdxf'), 'w+') {|f| f.write(@xml_io.string)}
   end
 
   before(:all) do
     build_xdxf_xml
+  end
+
+  before(:each) do
+    XDXF::Dictionary.delete_all
   end
 
   it "should correct parse and create dictionary" do
@@ -50,6 +55,26 @@ describe XDXF::Importer do
     dictionary.description.should == @description
     dictionary.lang_from.should == @lang_from
     dictionary.lang_to.should == @lang_to
+  end
+  
+  it "should correct parse and create articles" do
+    lambda do
+      XDXF::Importer.import(@xml_io)
+    end.should change(XDXF::Article, :count).by(@articles.count)
+    articles = XDXF::Article.all
+    articles.each_with_index do |article, i|
+      article.the_article.should == @articles[i][:content]
+    end
+  end
+
+  it "should correct parse and create article keys" do
+    lambda do
+      XDXF::Importer.import(@xml_io)
+    end.should change(XDXF::ArticleKey, :count).by(@articles.count)
+    article_keys = XDXF::ArticleKey.all
+    article_keys.each_with_index do |article_key, i|
+      article_key.the_key.should == @articles[i][:k]
+    end
   end
 
 end

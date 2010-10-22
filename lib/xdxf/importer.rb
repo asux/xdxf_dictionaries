@@ -15,8 +15,11 @@ module XDXF
                                         Nokogiri::XML::Node::SaveOptions::AS_HTML
 
       raise ImportError, "No IO or StringIO object given" if not (io.kind_of?(IO) or io.kind_of?(StringIO))
-
-      xml = io.read
+      if io.kind_of? StringIO
+        xml = io.string
+      else
+        xml = io.read
+      end
       raise ImportError, "Given dictionary is empty" if xml.empty?
 
       doc = Nokogiri.XML(xml)
@@ -34,7 +37,7 @@ module XDXF
         # Articles
         doc.css('ar').each do |ar|
           (ardb = dic.articles.create!(
-            :the_article => ar.content,
+            :the_article => ar.xpath('text()').first.serialize(serialize_options),
             :raw_text => ar.serialize(serialize_options)
           )).article_keys = ar.css('k').map{ |k|
             XDXF::ArticleKey.find_or_create_by_the_key(

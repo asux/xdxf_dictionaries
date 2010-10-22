@@ -4,7 +4,7 @@ module XDXF
   # * +the_article+ :text  
   # * +raw_text+ :text
   class Article < XDXF::Model
-    validates_presence_of :dictionary_id, :the_article, :raw_text
+    validates_presence_of :dictionary_id, :the_article
 
     belongs_to :dictionary
     has_many   :article_key_article_joins, :dependent => :destroy,  :class_name => "XDXF::ArticleKeyArticleJoin"
