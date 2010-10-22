@@ -1,0 +1,7 @@
+*~
+*.swp
+*.swo
+.yardoc*
+spec/db*
+spec/*.log
+spec/*.xdxf

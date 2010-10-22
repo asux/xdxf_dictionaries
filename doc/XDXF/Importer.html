@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Class: XDXF::Importer</title>
+<link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (I)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../XDXF.html" title="XDXF (module)">XDXF</a></span></span>
+     &raquo; 
+    <span class="title">Importer</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: XDXF::Importer
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">ActiveRecord::Base</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActiveRecord::Base</li>
+          
+            <li class="next">XDXF::Importer</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/xdxf/importer.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+Class implements import from XDXF dictionary
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+
+  
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#import-class_method" title="import (class method)">+ (Object) <strong>import</strong>(io, options = {:verbose =&gt; false}, serialize_options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Import a XDXF file inside the database <tt>serialize_options</tt> is
+<tt>Hash</tt> for <tt>Nokogiri::XML::Node#serialize</tt> method.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="import-class_method">
+  
+    + (<tt>Object</tt>) <strong>import</strong>(io, options = {:verbose =&gt; false}, serialize_options = {}) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Import a XDXF file inside the database <tt>serialize_options</tt> is
+<tt>Hash</tt> for <tt>Nokogiri::XML::Node#serialize</tt> method
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ImportError.html" title="XDXF::ImportError (class)">ImportError</a></span></tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/xdxf/importer.rb', line 11</span>
+
+<span class='def def kw'>def</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='import identifier id'>import</span><span class='lparen token'>(</span><span class='io identifier id'>io</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='symbol val'>:verbose</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='false false kw'>false</span><span class='rbrace token'>}</span><span class='comma token'>,</span> <span class='serialize_options identifier id'>serialize_options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='serialize_options identifier id'>serialize_options</span><span class='lbrack token'>[</span><span class='symbol val'>:save_with</span><span class='rbrack token'>]</span> <span class='opasgn op'>||=</span> <span class='Nokogiri constant id'>Nokogiri</span><span class='colon2 op'>::</span><span class='XML constant id'>XML</span><span class='colon2 op'>::</span><span class='Node constant id'>Node</span><span class='colon2 op'>::</span><span class='SaveOptions constant id'>SaveOptions</span><span class='colon2 op'>::</span><span class='FORMAT constant id'>FORMAT</span> <span class='bitor op'>|</span>
+                                    <span class='Nokogiri constant id'>Nokogiri</span><span class='colon2 op'>::</span><span class='XML constant id'>XML</span><span class='colon2 op'>::</span><span class='Node constant id'>Node</span><span class='colon2 op'>::</span><span class='SaveOptions constant id'>SaveOptions</span><span class='colon2 op'>::</span><span class='NO_DECLARATION constant id'>NO_DECLARATION</span> <span class='bitor op'>|</span>
+                                    <span class='Nokogiri constant id'>Nokogiri</span><span class='colon2 op'>::</span><span class='XML constant id'>XML</span><span class='colon2 op'>::</span><span class='Node constant id'>Node</span><span class='colon2 op'>::</span><span class='SaveOptions constant id'>SaveOptions</span><span class='colon2 op'>::</span><span class='NO_EMPTY_TAGS constant id'>NO_EMPTY_TAGS</span> <span class='bitor op'>|</span>
+                                    <span class='Nokogiri constant id'>Nokogiri</span><span class='colon2 op'>::</span><span class='XML constant id'>XML</span><span class='colon2 op'>::</span><span class='Node constant id'>Node</span><span class='colon2 op'>::</span><span class='SaveOptions constant id'>SaveOptions</span><span class='colon2 op'>::</span><span class='AS_HTML constant id'>AS_HTML</span>
+
+  <span class='raise identifier id'>raise</span> <span class='ImportError constant id'>ImportError</span><span class='comma token'>,</span> <span class='string val'>&quot;No IO or StringIO object given&quot;</span> <span class='if if_mod kw'>if</span> <span class='not not kw'>not</span> <span class='lparen token'>(</span><span class='io identifier id'>io</span><span class='dot token'>.</span><span class='kind_of? fid id'>kind_of?</span><span class='lparen token'>(</span><span class='IO constant id'>IO</span><span class='rparen token'>)</span> <span class='or or kw'>or</span> <span class='io identifier id'>io</span><span class='dot token'>.</span><span class='kind_of? fid id'>kind_of?</span><span class='lparen token'>(</span><span class='StringIO constant id'>StringIO</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
+
+  <span class='xml identifier id'>xml</span> <span class='assign token'>=</span> <span class='io identifier id'>io</span><span class='dot token'>.</span><span class='read identifier id'>read</span>
+  <span class='raise identifier id'>raise</span> <span class='ImportError constant id'>ImportError</span><span class='comma token'>,</span> <span class='string val'>&quot;Given dictionary is empty&quot;</span> <span class='if if_mod kw'>if</span> <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
+
+  <span class='doc identifier id'>doc</span> <span class='assign token'>=</span> <span class='Nokogiri constant id'>Nokogiri</span><span class='dot token'>.</span><span class='XML constant id'>XML</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+ 
+  <span class='transaction identifier id'>transaction</span> <span class='do do kw'>do</span> 
+  
+    <span class='comment val'># Info regarding the dict type</span>
+    <span class='dic identifier id'>dic</span> <span class='assign token'>=</span> <span class='XDXF constant id'>XDXF</span><span class='colon2 op'>::</span><span class='Dictionary constant id'>Dictionary</span><span class='dot token'>.</span><span class='create! fid id'>create!</span><span class='lparen token'>(</span>
+      <span class='symbol val'>:full_name</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='doc identifier id'>doc</span><span class='dot token'>.</span><span class='css identifier id'>css</span><span class='lparen token'>(</span><span class='string val'>'full_name'</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='dot token'>.</span><span class='content identifier id'>content</span><span class='comma token'>,</span>
+      <span class='symbol val'>:description</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='doc identifier id'>doc</span><span class='dot token'>.</span><span class='css identifier id'>css</span><span class='lparen token'>(</span><span class='string val'>'description'</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='dot token'>.</span><span class='content identifier id'>content</span><span class='comma token'>,</span>
+      <span class='symbol val'>:lang_from</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='doc identifier id'>doc</span><span class='dot token'>.</span><span class='css identifier id'>css</span><span class='lparen token'>(</span><span class='string val'>'xdxf'</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='dot token'>.</span><span class='attributes identifier id'>attributes</span><span class='lbrack token'>[</span><span class='string val'>'lang_from'</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='value identifier id'>value</span><span class='comma token'>,</span>
+      <span class='symbol val'>:lang_to</span>   <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='doc identifier id'>doc</span><span class='dot token'>.</span><span class='css identifier id'>css</span><span class='lparen token'>(</span><span class='string val'>'xdxf'</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='dot token'>.</span><span class='attributes identifier id'>attributes</span><span class='lbrack token'>[</span><span class='string val'>'lang_to'</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='value identifier id'>value</span>
+    <span class='rparen token'>)</span>
+  
+    <span class='comment val'># Articles</span>
+    <span class='doc identifier id'>doc</span><span class='dot token'>.</span><span class='css identifier id'>css</span><span class='lparen token'>(</span><span class='string val'>'ar'</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='ar identifier id'>ar</span><span class='bitor op'>|</span>
+      <span class='lparen token'>(</span><span class='ardb identifier id'>ardb</span> <span class='assign token'>=</span> <span class='dic identifier id'>dic</span><span class='dot token'>.</span><span class='articles identifier id'>articles</span><span class='dot token'>.</span><span class='create! fid id'>create!</span><span class='lparen token'>(</span>
+        <span class='symbol val'>:the_article</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='ar identifier id'>ar</span><span class='dot token'>.</span><span class='content identifier id'>content</span><span class='comma token'>,</span>
+        <span class='symbol val'>:raw_text</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='ar identifier id'>ar</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='serialize_options identifier id'>serialize_options</span><span class='rparen token'>)</span>
+      <span class='rparen token'>)</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='article_keys identifier id'>article_keys</span> <span class='assign token'>=</span> <span class='ar identifier id'>ar</span><span class='dot token'>.</span><span class='css identifier id'>css</span><span class='lparen token'>(</span><span class='string val'>'k'</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='map identifier id'>map</span><span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='k identifier id'>k</span><span class='bitor op'>|</span>
+        <span class='XDXF constant id'>XDXF</span><span class='colon2 op'>::</span><span class='ArticleKey constant id'>ArticleKey</span><span class='dot token'>.</span><span class='find_or_create_by_the_key identifier id'>find_or_create_by_the_key</span><span class='lparen token'>(</span>
+          <span class='symbol val'>:the_key</span>  <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='k identifier id'>k</span><span class='dot token'>.</span><span class='content identifier id'>content</span><span class='comma token'>,</span>
+          <span class='symbol val'>:raw_text</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='k identifier id'>k</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='serialize_options identifier id'>serialize_options</span><span class='rparen token'>)</span>
+        <span class='rparen token'>)</span>
+      <span class='rbrace token'>}</span>
+      <span class='puts identifier id'>puts</span> <span class='dstring node'>&quot;&lt;&lt; #{ardb.article_keys.map{|ak| ak.the_key}.join(&quot;,&quot;)}&quot;</span> <span class='if if_mod kw'>if</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:verbose</span><span class='rbrack token'>]</span>
+    <span class='end end kw'>end</span>
+            
+  <span class='end end kw'>end</span>
+ 
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Fri Oct 22 19:36:28 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.1 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>
