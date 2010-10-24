@@ -49,7 +49,7 @@ module XDXF
           puts "<< [#{index + 1}/#{articles.size}] (#{(index + 1)*100/articles.size}%) #{article_record.article_keys.map{|ak| ak.the_key}.join(",")}" if options[:verbose]
         end
 
-        puts "#{dictionary_record.articles.count} of #{articles.size} articles created from new dictionary" if options[:verbose]
+        puts "#{dictionary_record.articles.count} of #{articles.size} articles created from dictionary '#{dictionary_record.full_name}'" if options[:verbose]
         
       end
      
