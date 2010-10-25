@@ -14,13 +14,15 @@ module XDXF
                                         Nokogiri::XML::Node::SaveOptions::NO_EMPTY_TAGS |
                                         Nokogiri::XML::Node::SaveOptions::AS_HTML
 
-      raise ImportError, "No IO or StringIO object given" if not (io.kind_of?(IO) or io.kind_of?(StringIO))
-      if io.kind_of? StringIO
+      raise ImportError, "The object not responds to :read or :string method" if not (io.respond_to?(:read) or io.respond_to?(:string))
+      if io.respond_to?(:string)
         xml = io.string
       else
         xml = io.read
       end
       raise ImportError, "Given dictionary is empty" if xml.empty?
+
+      dictionary_record = nil
 
       doc = Nokogiri.XML(xml)
      
@@ -50,9 +52,10 @@ module XDXF
         end
 
         puts "#{dictionary_record.articles.count} of #{articles.size} articles created from dictionary '#{dictionary_record.full_name}'" if options[:verbose]
-        
+
       end
      
+      dictionary_record
     end
   end
 end
