@@ -1,14 +1,14 @@
 = XDXFDictionaries
 
-* Homepage: http://github.com/asux/xdxf_dictionaries/
+* Homepage: http://github.com/asux/xdxf_dictionaries
 * Git: git://github.com/asux/xdxf_dictionaries.git
 
 XDXF (XML Dictionary Exchange Format) is a project to unite all existing open dictionaries and provide both users and developers with universal XML-based format, convertible from and to other popular formats like Mova, PtkDic, StarDict... more[http://sourceforge.net/projects/xdxf/]
 
-The plugin contains models of XDXF dictionaries, importer from file, migration.
+The plugin contains models of XDXF dictionaries, articles, article keys, importer from file, migration.
 
 == Documentation
 
-YARD Documentation in link:doc/frames.html or link:doc/index.html
+YARD Documentation in http://rubydoc.info/github/asux/xdxf_dictionaries/master/frames
 
 Copyright (c) 2010 {Alexander Ulyanitsky}[mailto:a.ulyanitsky@gmail.com], released under the MIT license
