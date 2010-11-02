@@ -6,8 +6,15 @@ rescue LoadError
 end
 
 plugin_spec_dir = File.dirname(__FILE__)
-ActiveRecord::Base.logger = Logger.new(plugin_spec_dir + "/debug.log")
+ActiveRecord::Base.logger = Logger.new(File.join(plugin_spec_dir, "debug.log"))
 
-databases = YAML::load(IO.read(plugin_spec_dir + "/db/database.yml"))
-ActiveRecord::Base.establish_connection(databases[ENV["DB"] || "sqlite3"])
-load(File.join(plugin_spec_dir, "db", "schema.rb"))
+databases_yml = File.join(plugin_spec_dir, "db", "database.yml")
+if File.file?(databases_yml)
+  databases = YAML::load(File.read(databases_yml))
+  ActiveRecord::Base.establish_connection(databases[ENV["DB"] || "sqlite3"])
+end
+
+schema_rb = File.join(plugin_spec_dir, "db", "schema.rb")
+load(schema_rb) if File.file?(schema_rb)
+
+require File.join(plugin_spec_dir, '../lib', 'xdxf_spec_helper')

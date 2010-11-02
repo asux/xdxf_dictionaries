@@ -1,4 +1,5 @@
 require 'nokogiri'
+require File.join(File.dirname(__FILE__), "..", "node")
 
 module XDXF
   # Exception thrown when import error occures
@@ -40,7 +41,7 @@ module XDXF
         articles = doc.css('ar')
         articles.each_with_index do |article, index|
           (article_record = dictionary_record.articles.create!(
-            :the_article => article.xpath('text()').first.serialize(serialize_options),
+            :the_article => article.text_or_inner_html,
             :raw_text => article.serialize(serialize_options)
           )).article_keys = article.css('k').map do |article_key|
             XDXF::ArticleKey.find_or_create_by_the_key(
